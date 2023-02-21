@@ -14,7 +14,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/carte/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/carte/${window.location.search}`
         );
         return { ...state, location: 0 };
       }
@@ -22,7 +22,9 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/informations/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/informations/${
+            window.location.search
+          }`
         );
         return { ...state, location: 1 };
       }
@@ -30,7 +32,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/gallerie/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/gallerie/${window.location.search}`
         );
         return { ...state, location: 2 };
       }
@@ -38,7 +40,9 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/reservation/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/reservation/${
+            window.location.search
+          }`
         );
         return { ...state, location: 3 };
       }
@@ -46,7 +50,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/carte/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/carte/${window.location.search}`
         );
         return { ...state, location: 0 };
       }
@@ -54,7 +58,9 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/informations/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/informations/${
+            window.location.search
+          }`
         );
         return { ...state, location: 1 };
       }
@@ -62,7 +68,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/gallerie/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/gallerie/${window.location.search}`
         );
         return { ...state, location: 2 };
       }
@@ -70,7 +76,9 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `/reservation/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/reservation/${
+            window.location.search
+          }`
         );
         return { ...state, location: 3 };
       }

@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box } from "@mui/system";
 import pizza1 from "../assets/images/pizza1.jpg";
+import reine from "../assets/images/reine.jpg";
 import { Card, Container, List, ListItem } from "@mui/material";
 
 const carte = [
@@ -18,6 +19,13 @@ const carte = [
         price: 9,
         image: pizza1,
         altImage: "Marina",
+      },
+      {
+        name: "Reine",
+        ingredients: ["tomate", "ail", "origan", "huile d'olive"],
+        price: 9,
+        image: reine,
+        altImage: "Reine",
       },
     ],
   },
@@ -63,6 +71,7 @@ const Carte = () => {
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  gap: 3,
                 }}
               >
                 {item.items.map((item) => (

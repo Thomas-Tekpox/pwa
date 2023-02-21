@@ -4,42 +4,74 @@ const NavigationContext = createContext();
 
 const NavigationProvider = ({ children }) => {
   const initialState = {
-    location: 0,
+    location: null,
     swiper: null,
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "index": {
-        window.history.replaceState(null, null, "/");
+      case "carte": {
+        window.history.replaceState(
+          null,
+          null,
+          `/carte/${window.location.search}`
+        );
         return { ...state, location: 0 };
       }
       case "informations": {
-        window.history.replaceState(null, null, "/informations");
+        window.history.replaceState(
+          null,
+          null,
+          `/informations/${window.location.search}`
+        );
         return { ...state, location: 1 };
       }
       case "gallerie": {
-        window.history.replaceState(null, null, "/gallerie");
+        window.history.replaceState(
+          null,
+          null,
+          `/gallerie/${window.location.search}`
+        );
         return { ...state, location: 2 };
       }
-      case "reservations": {
-        window.history.replaceState(null, null, "/reservations");
+      case "reservation": {
+        window.history.replaceState(
+          null,
+          null,
+          `/reservation/${window.location.search}`
+        );
         return { ...state, location: 3 };
       }
       case 0: {
-        window.history.replaceState(null, null, "/");
+        window.history.replaceState(
+          null,
+          null,
+          `/carte/${window.location.search}`
+        );
         return { ...state, location: 0 };
       }
       case 1: {
-        window.history.replaceState(null, null, "/informations");
+        window.history.replaceState(
+          null,
+          null,
+          `/informations/${window.location.search}`
+        );
         return { ...state, location: 1 };
       }
       case 2: {
-        window.history.replaceState(null, null, "/gallerie");
+        window.history.replaceState(
+          null,
+          null,
+          `/gallerie/${window.location.search}`
+        );
         return { ...state, location: 2 };
       }
       case 3: {
-        window.history.replaceState(null, null, "/reservations");
+        window.history.replaceState(
+          null,
+          null,
+          `/reservation/${window.location.search}`
+        );
         return { ...state, location: 3 };
       }
       case "setSwiper": {
@@ -55,16 +87,30 @@ const NavigationProvider = ({ children }) => {
 
   useEffect(() => {
     // Default location
-    if (window.location.pathname === "/") {
-      dispatch({ type: "index" });
+    if (window.location.pathname === "/carte") {
+      dispatch({ type: "carte" });
     } else if (window.location.pathname === "/informations") {
       dispatch({ type: "informations" });
     } else if (window.location.pathname === "/gallerie") {
       dispatch({ type: "gallerie" });
-    } else if (window.location.pathname === "/reservations") {
-      dispatch({ type: "reservations" });
+    } else if (window.location.pathname === "/reservation") {
+      dispatch({ type: "reservation" });
     }
   }, []);
+
+  useEffect(() => {
+    if (!state.swiper || state.swiper.destroyed) return;
+
+    if (state.location === 0) {
+      state.swiper.slideTo(0);
+    } else if (state.location === 1) {
+      state.swiper.slideTo(1);
+    } else if (state.location === 2) {
+      state.swiper.slideTo(2);
+    } else if (state.location === 3) {
+      state.swiper.slideTo(3);
+    }
+  }, [state.swiper, state.location]);
 
   return (
     <NavigationContext.Provider

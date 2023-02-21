@@ -2,14 +2,14 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { BottomNavigation as BottomNavigationMUI } from "@mui/material";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import HomeIcon from "@mui/icons-material/Home";
 import { useNavigation } from "../contexts/NavigationContext";
 import HelpIcon from "@mui/icons-material/Help";
 import PermMediaIcon from "@mui/icons-material/PermMedia";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 
 const BottomNavigation = () => {
-  const { location, dispatch, swiper } = useNavigation();
+  const { location, dispatch } = useNavigation();
 
   return (
     <Box>
@@ -18,15 +18,14 @@ const BottomNavigation = () => {
         value={location}
         onChange={(event, newValue) => {
           dispatch({ type: newValue });
-          if (swiper) swiper.slideTo(newValue);
         }}
         as={"nav"}
       >
-        <BottomNavigationAction label="Index" icon={<HomeIcon />} />
+        <BottomNavigationAction label="Carte" icon={<RestaurantMenuIcon />} />
         <BottomNavigationAction label="Informations" icon={<HelpIcon />} />
         <BottomNavigationAction label="Gallerie" icon={<PermMediaIcon />} />
         <BottomNavigationAction
-          label="Reservations"
+          label="Reservation"
           icon={<ConfirmationNumberIcon />}
         />
       </BottomNavigationMUI>

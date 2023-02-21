@@ -5,8 +5,10 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { CssBaseline } from "@mui/material";
 import Base from "./templates/Base";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
-import Index from "./pages/Index";
+import Carte from "./pages/Carte";
 import Gallery from "./pages/Gallery";
 import Informations from "./pages/Informations";
 import Reservations from "./pages/Reservations";
@@ -15,14 +17,16 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <CssBaseline />
-    <Base>
-      {[
-        <Index key={"index"} />,
-        <Informations key={"informations"} />,
-        <Gallery key={"gallery"} />,
-        <Reservations key={"reservations"} />,
-      ]}
-    </Base>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <Base>
+        {[
+          <Carte keyName={"carte"} key={"carte"} />,
+          <Informations keyName={"informations"} key={"informations"} />,
+          <Gallery keyName={"gallery"} key={"gallery"} />,
+          <Reservations keyName={"reservation"} key={"reservation"} />,
+        ]}
+      </Base>
+    </LocalizationProvider>
   </React.StrictMode>
 );
 

@@ -4,7 +4,6 @@ import "swiper/css";
 
 const SwipeHandler = ({ children }) => {
   const { location, dispatch } = useNavigation();
-
   return (
     <Swiper
       style={{
@@ -23,6 +22,8 @@ const SwipeHandler = ({ children }) => {
           swiper,
         });
       }}
+      // Ensure that the elemnt doest not contain .no-swipe
+      noSwipingSelector=".no-swipe"
     >
       {children.map((children, i) => (
         <SwiperSlide key={`page-${i}`}>{children}</SwiperSlide>

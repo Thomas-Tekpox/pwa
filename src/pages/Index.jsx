@@ -59,7 +59,9 @@ const Index = ({ visible }) => {
               key={`restaurant-${i}`}
               onClick={() => {
                 if (restaurant.name === "Antinéa") {
-                  window.location.href = `/?restaurant=${restaurant.name}`;
+                  window.location.href = `${
+                    process.env.PUBLIC_URL ?? ""
+                  }/?restaurant=${restaurant.name}`;
                 }
               }}
             >

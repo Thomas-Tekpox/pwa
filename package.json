@@ -2,7 +2,7 @@
   "name": "crous",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/pwa-crous/build/",
+  "homepage": "https://lhuort.lpmiaw.univ-lr.fr/pwa-crous/build/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

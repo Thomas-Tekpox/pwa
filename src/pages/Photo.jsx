@@ -110,54 +110,42 @@ const Photo = () => {
         paddingBottom: 2,
         height: "100%",
         width: "100%",
-        position: "relative",
       }}
     >
-      <Stack
-        direction={"column"}
-        spacing={3}
+      <Typography component={"h1"} variant="h3">
+        capture photo
+      </Typography>
+      <input
+        type="file"
+        accept="image"
+        capture="camera"
+        onChange={handleFileSelect}
+      />
+
+      <Box
         sx={{
-          width: "100%",
-          overflowY: "auto",
-          overflowX: "hidden",
-          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Typography component={"h1"} variant="h3">
-          capture photo
-        </Typography>
-        <input
-          type="file"
-          accept="image"
-          capture="camera"
-          onChange={handleFileSelect}
-        />
+        {imageURL && (
+          <img
+            src={imageURL}
+            id="img-selected"
+            width="200"
+            alt="Selected one"
+          />
+        )}
+      </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          {imageURL && (
-            <img
-              src={imageURL}
-              id="img-selected"
-              width="200"
-              alt="Selected one"
-            />
-          )}
-        </Box>
+      <Button onClick={getMajColor}>Couleur majoritaire</Button>
 
-        <Button onClick={getMajColor}>Couleur majoritaire</Button>
-
-        <Stack direction={"column"} spacing={2}>
-          <video ref={videoRef} autoPlay hidden />
-          <canvas ref={canvasRef} id="canvas" />
-        </Stack>
-        <Button onClick={captureFrame}>"Snap..."</Button>
+      <Stack direction={"column"} spacing={2}>
+        <video ref={videoRef} autoPlay hidden />
+        <canvas ref={canvasRef} id="canvas" />
       </Stack>
+      <Button onClick={captureFrame}>"Snap..."</Button>
     </Container>
   );
 };

@@ -16,14 +16,14 @@ const Random = () => {
   const { writeColor } = useApi();
 
   const onShake = (devicemotionEvent) => {
-    const x = devicemotionEvent.accelerationIncludingGravity.x;
+    const x = devicemotionEvent.acceleration.x;
     setX(Math.round(x * 100) / 100);
-    const y = devicemotionEvent.accelerationIncludingGravity.y;
+    const y = devicemotionEvent.acceleration.y;
     setY(Math.round(y * 100) / 100);
-    const z = devicemotionEvent.accelerationIncludingGravity.z;
+    const z = devicemotionEvent.acceleration.z;
     setZ(Math.round(z * 100) / 100);
     const norme = Math.sqrt(x * x + y * y + z * z);
-    if (norme > 30) {
+    if (norme > 12) {
       // Vibrates the device for 500ms
       navigator.vibrate(500);
 

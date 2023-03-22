@@ -36,7 +36,7 @@ import {
 
 const Photo = () => {
   const { location } = useNavigation();
-  const isActive = location === 1;
+  const isActive = location === 2;
 
   const [imageURL, setImageURL] = useState("");
   const [color, setColor] = useState(null);

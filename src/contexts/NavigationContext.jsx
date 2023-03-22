@@ -10,39 +10,35 @@ const NavigationProvider = ({ children }) => {
 
   const reducer = (state, action) => {
     switch (action.type) {
-      case "carte": {
+      case "picker": {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/carte/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/picker/${window.location.search}`
         );
         return { ...state, location: 0 };
       }
-      case "informations": {
+      case "random": {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/informations/${
-            window.location.search
-          }`
+          `${process.env.PUBLIC_URL ?? ""}/random/${window.location.search}`
         );
         return { ...state, location: 1 };
       }
-      case "gallerie": {
+      case "photo": {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/gallerie/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/photo/${window.location.search}`
         );
         return { ...state, location: 2 };
       }
-      case "reservation": {
+      case "user": {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/reservation/${
-            window.location.search
-          }`
+          `${process.env.PUBLIC_URL ?? ""}/user/${window.location.search}`
         );
         return { ...state, location: 3 };
       }
@@ -50,7 +46,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/carte/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/picker/${window.location.search}`
         );
         return { ...state, location: 0 };
       }
@@ -58,9 +54,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/informations/${
-            window.location.search
-          }`
+          `${process.env.PUBLIC_URL ?? ""}/random/${window.location.search}`
         );
         return { ...state, location: 1 };
       }
@@ -68,7 +62,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/gallerie/${window.location.search}`
+          `${process.env.PUBLIC_URL ?? ""}/photo/${window.location.search}`
         );
         return { ...state, location: 2 };
       }
@@ -76,9 +70,7 @@ const NavigationProvider = ({ children }) => {
         window.history.replaceState(
           null,
           null,
-          `${process.env.PUBLIC_URL ?? ""}/reservation/${
-            window.location.search
-          }`
+          `${process.env.PUBLIC_URL ?? ""}/user/${window.location.search}`
         );
         return { ...state, location: 3 };
       }
@@ -95,14 +87,17 @@ const NavigationProvider = ({ children }) => {
 
   useEffect(() => {
     // Default location
-    if (window.location.pathname === "/carte") {
-      dispatch({ type: "carte" });
-    } else if (window.location.pathname === "/informations") {
-      dispatch({ type: "informations" });
-    } else if (window.location.pathname === "/gallerie") {
-      dispatch({ type: "gallerie" });
-    } else if (window.location.pathname === "/reservation") {
-      dispatch({ type: "reservation" });
+    if (
+      window.location.pathname === "/picker" ||
+      window.location.pathname === "/"
+    ) {
+      dispatch({ type: "picker" });
+    } else if (window.location.pathname === "/random") {
+      dispatch({ type: "random" });
+    } else if (window.location.pathname === "/photo") {
+      dispatch({ type: "photo" });
+    } else if (window.location.pathname === "/user") {
+      dispatch({ type: "user" });
     }
   }, []);
 

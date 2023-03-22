@@ -1,30 +1,65 @@
+import {
+  Box,
+  Container,
+  createTheme,
+  CssBaseline,
+  ThemeProvider,
+} from "@mui/material";
 import BottomNavigation from "../components/BottomNavigation";
+import { ApiProvider } from "../contexts/ApiContext";
 import { NavigationProvider } from "../contexts/NavigationContext";
-import Index from "../pages/Index";
 import SwipeHandler from "./Swipehandler";
 
-const Base = ({ children }) => {
-  // Get restaurant from query string
-  const restaurant = new URLSearchParams(window.location.search).get(
-    "restaurant"
-  );
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
+const Base = ({ children }) => {
   return (
     <NavigationProvider>
-      <SwipeHandler>
-        {children.map((children, i) => (
-          <section
-            key={`page-section-${i}`}
-            style={{
+      <ThemeProvider theme={theme}>
+        <ApiProvider>
+          <CssBaseline />
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              flexDirection: "column",
               height: "100%",
+              bgcolor: "background.default",
+              color: "text.primary",
             }}
           >
-            {children}
-          </section>
-        ))}
-      </SwipeHandler>
-      <BottomNavigation />
-      <Index visible={!restaurant} />
+            <SwipeHandler>
+              {children.map((children, i) => (
+                <section
+                  key={`page-section-${i}`}
+                  style={{
+                    height: "100%",
+                  }}
+                >
+                  <Container
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: 3,
+                      paddingTop: 2,
+                      paddingBottom: 2,
+                      height: "100%",
+                    }}
+                  >
+                    {children}
+                  </Container>
+                </section>
+              ))}
+            </SwipeHandler>
+            <BottomNavigation />
+          </Box>
+        </ApiProvider>
+      </ThemeProvider>
     </NavigationProvider>
   );
 };

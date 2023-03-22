@@ -3,10 +3,10 @@ import Box from "@mui/material/Box";
 import { BottomNavigation as BottomNavigationMUI } from "@mui/material";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useNavigation } from "../contexts/NavigationContext";
-import HelpIcon from "@mui/icons-material/Help";
-import PermMediaIcon from "@mui/icons-material/PermMedia";
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import ColorizeIcon from "@mui/icons-material/Colorize";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import PersonIcon from "@mui/icons-material/Person";
 
 const BottomNavigation = () => {
   const { location, dispatch } = useNavigation();
@@ -21,13 +21,10 @@ const BottomNavigation = () => {
         }}
         as={"nav"}
       >
-        <BottomNavigationAction label="Carte" icon={<RestaurantMenuIcon />} />
-        <BottomNavigationAction label="Informations" icon={<HelpIcon />} />
-        <BottomNavigationAction label="Gallerie" icon={<PermMediaIcon />} />
-        <BottomNavigationAction
-          label="Reservation"
-          icon={<ConfirmationNumberIcon />}
-        />
+        <BottomNavigationAction label="Picker" icon={<ColorizeIcon />} />
+        <BottomNavigationAction label="Random" icon={<ShuffleIcon />} />
+        <BottomNavigationAction label="Photo" icon={<InsertPhotoIcon />} />
+        <BottomNavigationAction label="User" icon={<PersonIcon />} />
       </BottomNavigationMUI>
     </Box>
   );

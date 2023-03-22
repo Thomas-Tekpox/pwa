@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Test Web BLE</h1>
+<p>Playbulb</p>
+
+<button id="discovery" type="button">Discovery</button>
+
+<button id="red" type="button">Red</button>
+
+<button id="disconnect" type="button">Disconnect</button>
+
+
+<script type="text/javascript" src="playbulb.js"></script>
+
+<script>
+var playbulbCandle = new PlaybulbCandle();
+
+
+document.getElementById('discovery').addEventListener('click', event => {
+  playbulbCandle.request()
+  .then(_ => playbulbCandle.connect())
+  .then(_ => { alert('connected to ID: ' + playbulbCandle.device.name); })
+  .catch(error => { console.log(error) });
+});
+
+document.getElementById('red').addEventListener('click', event => {
+  if(playbulbCandle.device != null)
+  {
+    //    let configData = new Uint8Array([0x00, r, g, b]);
+	let configData = new Uint8Array(4);
+	configData[0] = 0;     // always 0
+    configData[1] = 255;   // red
+    configData[2] = 0;     // green
+    configData[3] = 0;     // blue
+	playbulbCandle.writeColor(configData);
+  }
+});
+
+document.getElementById('disconnect').addEventListener('click', event => {
+  playbulbCandle.disconnect();
+});
+</script>
+</body>
+</html>

@@ -88,15 +88,21 @@ const NavigationProvider = ({ children }) => {
   useEffect(() => {
     // Default location
     if (
-      window.location.pathname === "/picker" ||
-      window.location.pathname === "/"
+      window.location.pathname === `${process.env.PUBLIC_URL ?? ""}/picker` ||
+      window.location.pathname === `${process.env.PUBLIC_URL ?? ""}/`
     ) {
       dispatch({ type: "picker" });
-    } else if (window.location.pathname === "/random") {
+    } else if (
+      window.location.pathname === `${process.env.PUBLIC_URL ?? ""}/random`
+    ) {
       dispatch({ type: "random" });
-    } else if (window.location.pathname === "/photo") {
+    } else if (
+      window.location.pathname === `${process.env.PUBLIC_URL ?? ""}/photo`
+    ) {
       dispatch({ type: "photo" });
-    } else if (window.location.pathname === "/user") {
+    } else if (
+      window.location.pathname === `${process.env.PUBLIC_URL ?? ""}/user`
+    ) {
       dispatch({ type: "user" });
     }
   }, []);

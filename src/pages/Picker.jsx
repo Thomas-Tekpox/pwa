@@ -1,5 +1,5 @@
 import { useNavigation } from "../contexts/NavigationContext";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useState } from "react";
 import { useApi } from "../contexts/ApiContext";
 import { HexColorPicker } from "react-colorful";
@@ -18,12 +18,24 @@ const Picker = () => {
   };
 
   return (
-    <Box className={"no-swipe"}>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 3,
+        paddingTop: 2,
+        paddingBottom: 2,
+        height: "100%",
+      }}
+    >
       <Typography component={"h1"} variant="h3">
         Picker
       </Typography>
-      <HexColorPicker color={color} onChange={handleChange} />
-    </Box>
+      <Box className={"no-swipe"}>
+        <HexColorPicker color={color} onChange={handleChange} />
+      </Box>
+    </Container>
   );
 };
 

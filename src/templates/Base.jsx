@@ -41,19 +41,7 @@ const Base = ({ children }) => {
                     height: "100%",
                   }}
                 >
-                  <Container
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: 3,
-                      paddingTop: 2,
-                      paddingBottom: 2,
-                      height: "100%",
-                    }}
-                  >
-                    {children}
-                  </Container>
+                  {children}
                 </section>
               ))}
             </SwipeHandler>

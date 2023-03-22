@@ -7,6 +7,7 @@ const Random = () => {
 
   const onShake = () => {
     console.log("Shake");
+    alert("Shake");
   };
 
   useEffect(() => {

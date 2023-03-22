@@ -50,9 +50,7 @@ const Photo = () => {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
       });
-      console.log(stream);
       setStream(stream);
-      console.log(videoRef);
       videoRef.current.srcObject = stream;
     } catch (error) {
       console.log(error);
@@ -79,7 +77,8 @@ const Photo = () => {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
-    const res = `#${couleurDominanteImage2(canvas, 5)}`;
+    const res = `#${couleurDominanteImage2("canvas", 5)}`;
+    console.log(res);
     writeColor(res);
     setColor(res);
   };
@@ -110,42 +109,55 @@ const Photo = () => {
         paddingTop: 2,
         paddingBottom: 2,
         height: "100%",
+        width: "100%",
+        position: "relative",
       }}
     >
-      <Typography component={"h1"} variant="h3">
-        capture photo
-      </Typography>
-      <input
-        type="file"
-        accept="image"
-        capture="camera"
-        onChange={handleFileSelect}
-      />
-
-      <Box
+      <Stack
+        direction={"column"}
+        spacing={3}
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          width: "100%",
+          overflowY: "auto",
+          overflowX: "hidden",
+          height: "100%",
         }}
       >
-        {imageURL && (
-          <img
-            src={imageURL}
-            id="img-selected"
-            width="200"
-            alt="Selected one"
-          />
-        )}
-      </Box>
+        <Typography component={"h1"} variant="h3">
+          capture photo
+        </Typography>
+        <input
+          type="file"
+          accept="image"
+          capture="camera"
+          onChange={handleFileSelect}
+        />
 
-      <Button onClick={getMajColor}>Couleur majoritaire</Button>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {imageURL && (
+            <img
+              src={imageURL}
+              id="img-selected"
+              width="200"
+              alt="Selected one"
+            />
+          )}
+        </Box>
 
-      <Stack direction={"column"} spacing={2}>
-        <video ref={videoRef} autoPlay hidden />
-        <canvas ref={canvasRef} />
+        <Button onClick={getMajColor}>Couleur majoritaire</Button>
+
+        <Stack direction={"column"} spacing={2}>
+          <video ref={videoRef} autoPlay hidden />
+          <canvas ref={canvasRef} id="canvas" />
+        </Stack>
+        <Button onClick={captureFrame}>"Snap..."</Button>
       </Stack>
-      <Button onClick={captureFrame}>"Snap..."</Button>
     </Container>
   );
 };

@@ -23,20 +23,31 @@ const Random = () => {
     const z = devicemotionEvent.accelerationIncludingGravity.z;
     setZ(Math.round(z * 100) / 100);
     const norme = Math.sqrt(x * x + y * y + z * z);
-    if (norme > 12) {
+    if (norme > 15) {
       // Vibrates the device for 500ms
       navigator.vibrate(500);
 
       // Plays a sound
-      const audio = new Audio("/sounds/coin.mp3");
-      audio.play();
+      // const audio = new Audio("/sounds/coin.mp3");
+      // audio.play();
 
       // Changes the color of the bulb
-      const color = getRandomSaturatedColor();
+      const color = `#${getRandomSaturatedColor()}`;
       writeColor(color);
       setColor(color);
     }
   };
+
+  // TEST
+  // useEffect(() => {
+  //   // Every 5 seconds, change the color of the bulb
+  //   const interval = setInterval(() => {
+  //     const color = `#${getRandomSaturatedColor()}`;
+  //     writeColor(color);
+  //     setColor(color);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   useEffect(() => {
     if (isActive) {
@@ -57,7 +68,7 @@ const Random = () => {
         flexDirection: "column",
         alignItems: "center",
         gap: 3,
-        backgroundColor: color && `#${color}`,
+        backgroundColor: color,
         paddingTop: 2,
         paddingBottom: 2,
         height: "100%",

@@ -1,46 +1,88 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h1>Test Web BLE</h1>
-<p>Playbulb</p>
+  <h1>Test Web BLE</h1>
+  <p>Playbulb</p>
 
-<button id="discovery" type="button">Discovery</button>
+  <button id="discovery" type="button">Discovery</button>
 
-<button id="red" type="button">Red</button>
+  <button id="red" type="button">Red</button>
+  <label>
+    Cliquez pour choisir une couleur
+    <input type="color" id="color-input">
+  </label>
 
-<button id="disconnect" type="button">Disconnect</button>
-
-
-<script type="text/javascript" src="playbulb.js"></script>
-
-<script>
-var playbulbCandle = new PlaybulbCandle();
+  <button id="disconnect" type="button">Disconnect</button>
 
 
-document.getElementById('discovery').addEventListener('click', event => {
-  playbulbCandle.request()
-  .then(_ => playbulbCandle.connect())
-  .then(_ => { alert('connected to ID: ' + playbulbCandle.device.name); })
-  .catch(error => { console.log(error) });
-});
+  <script type="text/javascript" src="playbulb.js"></script>
 
-document.getElementById('red').addEventListener('click', event => {
-  if(playbulbCandle.device != null)
-  {
-    //    let configData = new Uint8Array([0x00, r, g, b]);
-	let configData = new Uint8Array(4);
-	configData[0] = 0;     // always 0
-    configData[1] = 255;   // red
-    configData[2] = 0;     // green
-    configData[3] = 0;     // blue
-	playbulbCandle.writeColor(configData);
-  }
-});
+  <script>
+    var playbulbCandle = new PlaybulbCandle();
 
-document.getElementById('disconnect').addEventListener('click', event => {
-  playbulbCandle.disconnect();
-});
-</script>
+
+    document.getElementById('discovery').addEventListener('click', event => {
+      playbulbCandle.request()
+        .then(_ => playbulbCandle.connect())
+        .then(_ => { alert('connected to ID: ' + playbulbCandle.device.name); })
+        .catch(error => { console.log(error); });
+    });
+
+    document.getElementById('red').addEventListener('click', event => {
+      if (playbulbCandle.device != null) {
+        //    let configData = new Uint8Array([0x00, r, g, b]);
+        let configData = new Uint8Array(4);
+        configData[0] = 0;     // always 0
+        configData[1] = 255;   // red
+        configData[2] = 0;     // green
+        configData[3] = 0;     // blue
+        playbulbCandle.writeColor(configData);
+      }
+    });
+
+    document.getElementById('disconnect').addEventListener('click', event => {
+      playbulbCandle.disconnect();
+    });
+
+    function convertHexColorCodeToRGB(hexColorString) {
+      let r = parseInt(hexColorString.substr(1, 2), 16);
+      let g = parseInt(hexColorString.substr(3, 2), 16);
+      let b = parseInt(hexColorString.substr(5, 2), 16);
+      return [r, g, b];
+    }
+
+    const debounce = (func, wait) => {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    };
+
+    const writeColorDebounce = debounce((value) => {
+      if (playbulbCandle.device != null) {
+        let configData = new Uint8Array(4);
+        configData[0] = 0;     // always 0
+        const rgb = convertHexColorCodeToRGB(value);
+        configData[1] = rgb[0];   // red
+        configData[2] = rgb[1];     // green
+        configData[3] = rgb[2];     // blue
+        playbulbCandle.writeColor(configData);
+      }
+    }, 1000);
+
+    document.getElementById('color-input').addEventListener('input', event => {
+      if (playbulbCandle.device != null) {
+        writeColorDebounce(event.target.value);
+      }
+    });
+  </script>
 </body>
+
 </html>

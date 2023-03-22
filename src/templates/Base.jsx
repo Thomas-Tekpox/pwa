@@ -6,6 +6,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import BottomNavigation from "../components/BottomNavigation";
+import ModalNotConnected from "../components/ModalNotConnected";
 import { ApiProvider } from "../contexts/ApiContext";
 import { NavigationProvider } from "../contexts/NavigationContext";
 import SwipeHandler from "./Swipehandler";
@@ -56,6 +57,7 @@ const Base = ({ children }) => {
                 </section>
               ))}
             </SwipeHandler>
+            <ModalNotConnected />
             <BottomNavigation />
           </Box>
         </ApiProvider>

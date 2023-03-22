@@ -23,7 +23,7 @@ const Random = () => {
     const z = devicemotionEvent.accelerationIncludingGravity.z;
     setZ(Math.round(z * 100) / 100);
     const norme = Math.sqrt(x * x + y * y + z * z);
-    if (norme > 15) {
+    if (norme > 30) {
       // Vibrates the device for 500ms
       navigator.vibrate(500);
 

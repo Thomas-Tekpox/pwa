@@ -77,10 +77,6 @@ const ApiProvider = ({ children }) => {
   };
 
   const [macAddress, setMacAddress] = useState("");
-  console.log(
-    "🚀 ~ file: ApiContext.jsx:80 ~ ApiProvider ~ macAddress:",
-    macAddress
-  );
   const getMacAddress = async (device) => {
     if (!device) {
       setMacAddress("");

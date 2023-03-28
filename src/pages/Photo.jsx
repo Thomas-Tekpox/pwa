@@ -110,6 +110,8 @@ const Photo = () => {
         paddingBottom: 2,
         height: "100%",
         width: "100%",
+        overflow: "auto",
+        overflowX: "hidden",
       }}
     >
       <Typography component={"h1"} variant="h3">

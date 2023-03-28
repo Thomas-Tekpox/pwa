@@ -46,6 +46,9 @@ const ApiProvider = ({ children }) => {
   };
 
   const writeColor = (data) => {
+    if (!device || !device.gatt) {
+      return Promise.reject("Device is not connected.");
+    }
     return device.gatt
       .getPrimaryService(0xff02)
       .then((service) => service.getCharacteristic(0xfffc))

@@ -4,6 +4,7 @@ import { useApi } from "../contexts/ApiContext";
 // Modal to display if no device is connected
 const ModalNotConnected = () => {
   const { device, request, connect, writeColor, disconnect } = useApi();
+
   return (
     <Modal open={!device} onClose={() => {}}>
       <Stack

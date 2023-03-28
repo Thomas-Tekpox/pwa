@@ -7,10 +7,17 @@ const User = () => {
   const { location } = useNavigation();
   const isActive = location === 3;
 
-  const { disconnect, writeColor } = useApi();
+  const { disconnect, writeColorNoDebounce } = useApi();
   const [curInterval, setCurInterval] = useState(null);
 
   const [color, setColor] = useState();
+  const [average, setAverage] = useState(0);
+
+  if (!isActive && curInterval) {
+    clearInterval(curInterval);
+    setInterval(null);
+    setAverage(0);
+  }
 
   const startTone = () => {
     if (curInterval) {
@@ -33,13 +40,14 @@ const User = () => {
               const total = dataArray.reduce((acc, curr) => acc + curr);
               const average = total / bufferLength;
               console.log(average);
+              setAverage(average);
               // If above 50, we have a tone
-              if (average > 60) {
-                writeColor("#ff0000");
-                setColor("red");
+              if (average > 50) {
+                writeColorNoDebounce("#ff0000");
+                setColor("#ff0000");
               } else {
-                writeColor("#000000");
-                setColor("black");
+                writeColorNoDebounce("#ffffff");
+                setColor("#ffffff22");
               }
             }, 100)
           );
@@ -51,6 +59,7 @@ const User = () => {
   useEffect(() => {
     return () => {
       clearInterval(curInterval);
+      setAverage(0);
     };
   }, [curInterval, isActive]);
 
@@ -88,6 +97,7 @@ const User = () => {
       >
         Déconnexion
       </Button>
+      <Typography>{average} db</Typography>
     </Container>
   );
 };

@@ -72,6 +72,16 @@ const ApiProvider = ({ children }) => {
     writeColor(configData);
   }, 1000);
 
+  const writeColorNoDebounce = (value) => {
+    let configData = new Uint8Array(4);
+    configData[0] = 0; // always 0
+    const rgb = convertHexColorCodeToRGB(value);
+    configData[1] = rgb[0]; // red
+    configData[2] = rgb[1]; // green
+    configData[3] = rgb[2]; // blue
+    writeColor(configData);
+  };
+
   const disconnect = () => {
     if (!device) {
       return Promise.reject("Device is not connected.");
@@ -107,6 +117,7 @@ const ApiProvider = ({ children }) => {
         request,
         connect,
         writeColor: writeColorDebounced,
+        writeColorNoDebounce: writeColorNoDebounce,
         disconnect,
         getMacAddress,
         macAddress,

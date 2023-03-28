@@ -13,6 +13,7 @@ const Picker = () => {
   const [color, setColor] = useState("#ffffff");
 
   const handleChange = (color) => {
+    console.log("color", color);
     setColor(color);
     writeColor(color);
   };
